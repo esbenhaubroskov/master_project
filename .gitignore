@@ -1,0 +1,10 @@
+__pycache__/
+
+RMP/rmp-project/program.py
+*runs/
+RMP/rmp-project/results/rmp_our_example_with_nn2.gif
+.spyproject
+.vscode
+*.zip
+*events.out.tfevents.*
+*.png

@@ -1,0 +1,164 @@
+{
+    "uav_set":{
+        "num_uavs": 3, 
+        "max_distance": false,
+        "radio_max_distance": true,
+        "lidar_obstacle_avoidance": true,
+        "nn_obstacle_avoidance": false,
+        "obstacle_avoidance": false,
+        "collision_avoidance": true,
+        "formation_control": false,
+        "damper": true,
+        "goal_attractor": true,
+        "nn_obstacle_avoidance_residual": false,
+        "nn_goal_residual": false
+    },
+
+    "lidar": {
+        "n_rays": 20,
+        "max_range": 2.5
+    },
+
+    "learning":{
+        "train":  false,
+        "residual": true,
+        "model_path":  "results/runs/reward_shaping/2022-05-07_10-54-44/0/ppo_models_id_0/20000.zip",
+        "network_type": "ppo", 
+        "activation_function": "Tanh",
+        "policy_net_arch": [128,64],
+        "value_net_arch":[128,64], 
+        "init_output_zero": false,
+        "device": "cpu",
+        "observation_space_shape": 28,
+        "action_space_shape": 5,
+        "discount_factor": 0.99,
+        "num_episodes": 7000000, 
+        "max_steps": 2048,
+        "batch_size": 64,
+        "solved_score": 195,
+        "goal_gain": 10,
+        "collision_gain": 20,
+        "distance_gain": 5,
+        "control_gain": 0.05,
+        "step_gain": 0.05,
+        "idle_gain": 2,
+        "traversed_gain":2,
+        "min_reward": -100,
+        "max_reward": 100
+    },
+
+    "env_params":{
+        "use_custom_env":false,
+        "use_template":true,
+        "custom_env":"template1.json",
+        "n_obstacles": 10,
+        "obstacle_type": "circles",
+        "drone_init_radius": 2.5,
+        "seed": 2606283779513842598
+    },
+
+    "data_set":{
+        "save_path": "experiments/comm_and_obstacles/template1" ,
+        "save_animation": false,
+        "save_accelerations_plot": false,
+        "plot_accelerations": true,
+        "plot_rmp_tree": false,
+        "save_rmp_tree": false,
+        "save_max_distance": true,
+        "save_rssi": true,
+        "save_animation_frames": true,
+        "include_max_distance": true,
+        "snapshot_frames": [270],
+        "plot_speed": true,
+        "save_speed": true
+    },
+
+    "sim":{
+        "integrator": "simple",
+        "atol": 1e-1,
+        "rtol": 1e-1,
+        "d_terminate": 0.2,
+        "v_terminate": 1,
+        "update_time": 0.2
+    },
+
+    "max_distance":{
+        "d_max": 4,
+        "w": 1,
+        "alpha": 3,
+        "beta": 2
+    },
+
+    "radio_max_distance":{
+        "rssi_critical":-50,
+        "rssi_no_signal": -70,
+        "d_max": 4,
+        "w": 1,
+        "alpha": 3,
+        "beta": 2,
+        "distance_threshold": 2,
+        "distance_change_coefficient": 0.005,
+        "exponential_falloff": 0.999
+    },
+
+    "radio_model":{
+        "name":"SimplifiedStochasticPathLoss",
+        "parameters":{
+            "K": 1e-6,
+            "loss_exponent": 4,
+            "d_0": 10,
+            "std_dev": 4,
+            "nlos_attenuation": 16
+        }
+    },
+
+    "goal_attractor":{
+        "alpha": 1,
+        "gain": 1,  
+        "eta": 2
+    },
+
+    "obstacle_avoidance":{
+        "epsilon": 0.2
+    },
+
+    "poly_obst_avoid":{
+        "d_min": 0.5,
+        "w": 1,
+        "alpha": 1,
+        "eta": 1,
+        "epsilon": 1
+    },
+
+    "lidar_obst_avoid":{
+        "update_weight": 1,
+        "ca_R": 0,
+        "ca_epsilon": 1e-8,
+        "ca_alpha":1e-4,
+        "ca_eta":1
+    },
+
+    "collision_avoidance":{
+        "R": 0.3,
+        "eta": 10
+    },
+
+    "nn_collision_avoidance":{
+        "deterministic": false,
+        "residual": false
+    },
+
+    "formation_flying":{
+        "formation_type": "triangle",
+        "weight_fc": 5,
+        "dist": 1
+        },
+    "damper":{
+        "w": 1,
+        "eta": 2
+    },
+    "git_info":{
+        "branch": null,
+        "commit_hash": null
+    }
+}

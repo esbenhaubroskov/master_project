@@ -1,0 +1,16 @@
+{
+    "formation_links":[
+        [0,1],
+        [1,0]],
+
+    "goal_links":[0,1],
+
+    "kwargs":{
+        "n_drones": 0,
+        "n_obstacles": 0,
+        "n_goals": 0,
+        "max_distance": 2.5,
+        "starting_positions":[[-0.5, -0.5], [0.5, 0.5]],
+        "goals": [[-10, -5],[10, 5]]
+    }
+}

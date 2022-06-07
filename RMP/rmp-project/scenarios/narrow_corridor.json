@@ -1,0 +1,27 @@
+{
+    "formation_links":[
+        [0,0,0],
+        [1,0,0],
+        [1,0,0]],
+
+    "goal_links":[0,null,null],
+
+    "kwargs":{
+        "n_drones": 0,
+        "n_obstacles": 0,
+        "obstacle_type":"circles",
+        "max_distance": 2.5, 
+        "seed": 2606283779513842598,
+        "xlim":[-5,5], 
+        "ylim":[-5,5], 
+        "n_goals": 0,
+        "minimum_travel_distance": null,
+        "starting_positions":[[-4, 0], [-5, 1], [-4.5, -1]],
+        "goals": [[5, 0],[4, 1],[4, -1]],
+        "goal_radius": 0.5,
+        "obstacle_polygons": [
+            [[-4,3],[-1, 0.5],[3, 0.5],[3, 3]],
+            [[-4,-3],[-1, -0.5],[3, -0.5],[3,-3]]
+        ]
+    }
+}

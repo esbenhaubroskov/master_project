@@ -1,0 +1,109 @@
+{
+    "uav_set":{
+        "num_uavs": 1, 
+        "max_distance": false,
+        "radio_max_distance": false,
+        "obstacle_avoidance": true,
+        "nn_obstacle_avoidance": true,
+        "collision_avoidance": false,
+        "goal_attractor": true,
+        "formation_control": false,
+        "damper": false
+    },
+
+    "lidar": {
+        "n_rays": 20,
+        "max_range": 5
+    },
+
+    "learning":{
+        "train":  true,
+        "model_path":  "results/model_with_HOA_10_mil.pt",
+        "network_type": "ppo", 
+        "device": "cpu",
+        "discount_factor": 0.99,
+        "num_episodes": 10, 
+        "max_steps": 500,
+        "batch_size": 1600,
+        "solved_score": 195,
+        "goal_gain": 30,
+        "collision_gain": 30,
+        "distance_gain": 0.001,
+        "control_gain": 0.05,
+        "clearance_gain": 0.001,
+        "min_reward": -100,
+        "max_reward": 100
+    },
+
+    "env_params":{
+        "n_obstacles": 2,
+        "obstacle_type": "circles",
+        "drone_init_radius": 2.5,
+        "seed": null 
+    },
+
+    "data_set":{
+        "save_path": "results" ,
+        "save_animation": false,
+        "save_accelerations_plot": false,
+        "plot_accelerations": true,
+        "plot_rmp_tree": false,
+        "save_rmp_tree": false
+    },
+
+    "sim":{
+        "atol": 1e-1,
+        "rtol": 1e-1,
+        "d_terminate": 0.2,
+        "v_terminate": 1,
+        "update_time": 0.2
+    },
+
+    "max_distance":{
+        "d_max": 4,
+        "w": 1,
+        "alpha": 3,
+        "beta": 2
+    },
+
+    "goal_attractor":{
+        "alpha": 1,
+        "gain": 1,  
+        "eta": 2
+    },
+
+    "obstacle_avoidance":{
+        "epsilon": 0.2
+    },
+
+    "poly_obst_avoid":{
+        "d_min": 0.5,
+        "w": 1,
+        "alpha": 1,
+        "eta": 1,
+        "epsilon": 1
+    },
+
+    "collision_avoidance":{
+        "R": 0.3,
+        "eta": 10
+    },
+
+    "nn_collision_avoidance":{
+        "deterministic": false
+    },
+
+    "formation_flying":{
+        "formation_type": "triangle",
+        "weight_fc": 5,
+        "dist": 1
+        },
+    "damper":{
+        "w": 2,
+        "eta": 1.2
+    },
+    "git_info":{
+        "branch": null,
+        "commit_hash": null
+    }
+}
