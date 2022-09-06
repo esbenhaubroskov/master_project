@@ -25,7 +25,23 @@ from itertools import combinations
 # experiments\reward_shaping\config1\config_length.json
 
 #config = load_config(r'experiments\residual_goal_attractor\config.json')
-config = load_config(r'experiments\comm\comm_stretch_config.json')
+# Radio maximum distance:
+#config = load_config(r'experiments\comm\comm_stretch_config.json')
+#config = load_config(r'experiments\comm\comm_obstruction_config.json')
+
+#config = load_config(r'experiments\comm_and_obstacles\corridor_config.json')
+
+# Obstacle avoidance:
+#config = load_config(r'experiments\hand_crafted_obstacle_avoidance\config.json')
+
+# Residual goal attractor:
+#config = load_config(r'experiments\residual_goal_attractor\config.json')
+
+# Our residual obstacle:
+#config = load_config(r'experiments\reward_shaping\config5\config_length.json')
+
+
+
 #config = load_config(r'config.json')
 fig_save_path = config.data_set['save_path']
 
@@ -36,7 +52,7 @@ metadata = dict(
 gif_metadata = dict(
     comment = config_string
 )
-
+figure_format = ".pdf"
 # --------------------------------------------
 # ------------- Build RMP tree ---------------
 # --------------------------------------------
@@ -99,7 +115,7 @@ accs = swarm.accelerations
 # ---------------------------------------------
 # ---------- Animation and results ------------
 # ---------------------------------------------
-plt.rcParams.update({'font.size': 16})
+plt.rcParams.update({'font.size': 18}) # Before it was 16
 
 child_accs = r.child_accs # Robot accelerations
 root_childs = r.children # Robot leafs can be accessed
@@ -159,7 +175,7 @@ print(f'policy summary: {policy_summary}')
 # Plot accelerations
 i = 0
 for a in accs[1:]: # start from 1 to exclude robot accelerations
-    acc_save_path = config.data_set['save_path'] / f"{policy_summary}_acc_rob_{i}" 
+    acc_save_path = config.data_set['save_path'] / f"{policy_summary}_acc_rob_{i}{figure_format}" 
     plot_acceleration(a, save_fig=config.data_set['save_accelerations_plot'], save_path=acc_save_path, labels=labels, metadata=metadata)
     i += 1
 
@@ -200,7 +216,7 @@ if config.uav_set["radio_max_distance"]:
 
     md_ax.legend()
     if config.data_set["save_max_distance"]:
-        md_fig.savefig(fig_save_path / (policy_summary + "_max_dist"), bbox_inches='tight', metadata=metadata)
+        md_fig.savefig(fig_save_path / (policy_summary + "_max_dist" + figure_format), bbox_inches='tight', metadata=metadata)
     md_ax.set_title("Max distance based on radio signal quality")
 
     # RSSI
@@ -224,7 +240,7 @@ if config.uav_set["radio_max_distance"]:
         rssi_ax.axvline(frame*update_time, color='k', alpha=0.5)
         rssi_ax.annotate(f"t = {update_time*frame}", (frame*update_time+2, rssi_ax.get_ylim()[1]-20), rotation=-90)
     if config.data_set["save_rssi"]:
-        rssi_fig.savefig(fig_save_path / (policy_summary + "_rssi"), bbox_inches='tight', metadata=metadata)
+        rssi_fig.savefig(fig_save_path / (policy_summary + "_rssi" + figure_format), bbox_inches='tight', metadata=metadata)
     rssi_ax.set_title("RSSI")
 
 # Plot actual distances and max distance
@@ -254,7 +270,7 @@ if config.uav_set["max_distance"]:
     md_ax.set_ylabel("Distance [m]")
     md_ax.legend()
     if config.data_set["save_max_distance"]:
-        md_fig.savefig(fig_save_path / (policy_summary + "_max_dist"), bbox_inches='tight', metadata=metadata)
+        md_fig.savefig(fig_save_path / (policy_summary + "_max_dist" + figure_format), bbox_inches='tight', metadata=metadata)
     md_ax.set_title("Max distance")
 
 # Plot speed over time
@@ -280,7 +296,7 @@ if config.data_set["plot_speed"]:
     speed_ax.set_ylabel("Speed [m/s]")
     #speed_ax.legend()
     if config.data_set["save_speed"]:
-        speed_fig.savefig(fig_save_path / (policy_summary + "_speed"), bbox_inches='tight', metadata=metadata)
+        speed_fig.savefig(fig_save_path / (policy_summary + "_speed" + figure_format), bbox_inches='tight', metadata=metadata)
 
 N = swarm_factory.N
 x_g = swarm_factory.x_g
@@ -291,7 +307,7 @@ poly = swarm_factory.poly
 poly = environment["obstacle_polygons"]
 
 # Reduce the font size for simulation
-plt.rcParams.update({'font.size': 10})
+plt.rcParams.update({'font.size': 14}) # Before it was 10
 # Creating animate object for animation
 A = Animate(sol, N, x_g, x_0, x_o, r_o, poly, accs, update_time, swarm.t_log, labels, normalized_velocity=False, plot_arrows=False)
 A.logarthmic_arrows = True
@@ -317,7 +333,7 @@ for frame in plot_frames:
     # Plot the frame
     frame_fig, frame_ax = A.plot_frame(frame, md_ranges=md_ranges)
     frame_figs.append(frame_fig)
-    file_name = policy_summary + f"_frame_{frame}"
+    file_name = policy_summary + f"_frame_{frame}" + figure_format
     
     
     # Save the frame
